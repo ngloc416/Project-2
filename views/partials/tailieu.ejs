@@ -1,0 +1,12 @@
+<h3>Tài liệu</h3>
+<ul>
+  <%for (const file of documents) { %>
+  <li>
+    <a href="tailieu/<%= file %> "><%= file.substring(0, file.length - 4) %></a>
+  </li>
+  <% } %>
+</ul>
+
+<script>
+  document.getElementById("tailieu").setAttribute("class", "selected");
+</script>

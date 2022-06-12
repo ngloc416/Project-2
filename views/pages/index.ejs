@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Learning English Online</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png" />
+  </head>
+
+  <body>
+    <header>
+      <a href="/"><img src="/images/Logo.png" alt="" id="logo" /></a>
+    </header>
+
+    <div id="menu">
+      <ul>
+        <li><a href="/" id="trangchu">Trang chủ</a></li>
+        <li><a href="/nguphap" id="nguphap">Ngữ pháp</a></li>
+        <li><a href="/tuvung" id="tuvung">Từ vựng</a></li>
+        <li><a href="/tailieu" id="tailieu">Tài liệu</a></li>
+        <li><a href="/dethi" id="dethi">Đề thi</a></li>
+        <li>
+          <a href="/dongtubatquytac" id="dongtubatquytac"
+            >Động từ bất quy tắc</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <% if (title == '/') { %>
+    <div id="left"><%- include ../partials/home %></div>
+    <%} else if (title == "/dongtubatquytac") { %>
+    <div id="left"><%- include ../partials/dongtubatquytac %></div>
+    <%} else if (title == "/nguphap") { %>
+    <div id="left"><%- include ../partials/nguphap %></div>
+    <%} else if (title == "/tuvung") { %>
+    <div id="left"><%- include ../partials/tuvung %></div>
+    <%} else if (title == "/tailieu") { %>
+    <div id="left"><%- include ../partials/tailieu %></div>
+    <%} else if (title == "/dethi") { %>
+    <div id="left"><%- include ../partials/dethi %></div>
+    <%} else if (title.substring(0, 4) == "Unit") {%>
+    <div id="left">
+      <iframe
+        id="lesson"
+        src="/data/lessons/<%= title %> "
+        frameborder="0"
+        scrolling="no"
+        onload="resizeIframe(this)"
+      ></iframe>
+      <p id="danhsach"><a href="/nguphap">DANH SÁCH BÀI HỌC</a></p>
+    </div>
+    <script>
+      document.getElementById("nguphap").setAttribute("class", "selected");
+    </script>
+    <%} else if (title.substring(title.length - 4, title.length) == ".pdf") {%>
+    <div id="left">
+      <h3><%= title.substring(0, title.length - 4) %></h3>
+      <iframe src="/data/documents/<%= title %> "></iframe>
+      <p id="danhsach"><a href="/tailieu">DANH SÁCH TÀI LIỆU</a></p>
+    </div>
+    <script>
+      document.getElementById("tailieu").setAttribute("class", "selected");
+    </script>
+    <%}%>
+
+    <script>
+      function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
+      }
+    </script>
+
+    <div id="right">
+      <h3>Từ điển Anh - Việt</h3>
+      <input type="text" id="word" />
+      <button type="submit" onclick="dich()" id="btn">Dịch</button>
+      <div id="meaning">
+        <iframe src="" title="" id="mean"></iframe>
+      </div>
+
+      <script>
+        function dich() {
+          var data = document.getElementById("word").value;
+          var url;
+          if (data != "") {
+            url =
+              "https://dictionary.cambridge.org/vi/dictionary/english-vietnamese/" +
+              data;
+            document.getElementById("mean").setAttribute("height", "700px");
+          } else {
+            url = "";
+            document.getElementById("mean").setAttribute("height", "auto");
+          }
+          document.getElementById("mean").setAttribute("src", url);
+        }
+        var input = document.getElementById("word");
+        input.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            document.getElementById("btn").click();
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>
