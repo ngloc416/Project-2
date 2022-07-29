@@ -1,0 +1,12 @@
+<h3>Đáp án</h3>
+<ul>
+  <%for (const file of keys) { %>
+  <li>
+    <a href="dapan/<%= file %> "><%= file.substring(0, file.length - 4) %></a>
+  </li>
+  <% } %>
+</ul>
+
+<script>
+  document.getElementById('dethi').setAttribute('class', 'selected');
+</script>

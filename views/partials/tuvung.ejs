@@ -1,3 +1,12 @@
+<h3>Từ vựng</h3>
+<ul>
+  <%for (const file of vocabulary) { %>
+  <li>
+    <a href="tuvung/<%= file %> "><%= file.substring(0, file.length - 5) %></a>
+  </li>
+  <% } %>
+</ul>
+
 <script>
   document.getElementById("tuvung").setAttribute("class", "selected");
 </script>

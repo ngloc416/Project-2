@@ -38,7 +38,9 @@
     <div id="left"><%- include ../partials/tailieu %></div>
     <%} else if (title == "/dethi") { %>
     <div id="left"><%- include ../partials/dethi %></div>
-    <%} else if (title.substring(0, 4) == "Unit") {%>
+    <%} else if (title == "/dapan") { %>
+    <div id="left"><%- include ../partials/dapan %></div>
+    <%}else if (title.substring(0, 4) == "Unit") {%>
     <div id="left">
       <iframe
         id="lesson"
@@ -50,22 +52,55 @@
       <p id="danhsach"><a href="/nguphap">DANH SÁCH BÀI HỌC</a></p>
     </div>
     <script>
-      document.getElementById("nguphap").setAttribute("class", "selected");
+      document.getElementById('nguphap').setAttribute('class', 'selected');
     </script>
-    <%} else if (title.substring(title.length - 4, title.length) == ".pdf") {%>
+    <%} else if (title.substring(title.length - 4, title.length) == ".pdf" &&
+    title.substring(0, 2) != "Đề" && title.substring(0, 3) != "Đáp") {%>
     <div id="left">
       <h3><%= title.substring(0, title.length - 4) %></h3>
       <iframe src="/data/documents/<%= title %> "></iframe>
       <p id="danhsach"><a href="/tailieu">DANH SÁCH TÀI LIỆU</a></p>
     </div>
     <script>
-      document.getElementById("tailieu").setAttribute("class", "selected");
+      document.getElementById('tailieu').setAttribute('class', 'selected');
+    </script>
+    <%} else if (title.substring(0, 6) == "Chủ đề") {%>
+    <div id="left">
+      <iframe
+        id="lesson"
+        src="/data/vocabulary/<%= title %> "
+        frameborder="0"
+        scrolling="no"
+        onload="resizeIframe(this)"
+      ></iframe>
+      <p id="danhsach"><a href="/tuvung">DANH SÁCH CHỦ ĐỀ</a></p>
+    </div>
+    <script>
+      document.getElementById('tuvung').setAttribute('class', 'selected');
+    </script>
+    <%} else if (title.substring(0, 2) == "Đề") {%>
+    <div id="left">
+      <iframe src="/data/exams/<%= title %> "></iframe>
+      <p class="danhsach"><a href="/dapan">ĐÁP ÁN</a></p>
+      <p class="danhsach"><a href="/dethi">DANH SÁCH ĐỀ THI</a></p>
+    </div>
+    <script>
+      document.getElementById('dethi').setAttribute('class', 'selected');
+    </script>
+    <%} else if (title.substring(0, 3) == "Đáp") {%>
+    <div id="left">
+      <iframe src="/data/keys/<%= title %> "></iframe>
+      <p class="danhsach"><a href="/dapan">DANH SÁCH ĐÁP ÁN</a></p>
+      <p class="danhsach"><a href="/dethi">DANH SÁCH ĐỀ THI</a></p>
+    </div>
+    <script>
+      document.getElementById('dethi').setAttribute('class', 'selected');
     </script>
     <%}%>
 
     <script>
       function resizeIframe(obj) {
-        obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
       }
     </script>
 
@@ -79,26 +114,51 @@
 
       <script>
         function dich() {
-          var data = document.getElementById("word").value;
+          var data = document.getElementById('word').value;
           var url;
-          if (data != "") {
+          if (data != '') {
             url =
-              "https://dictionary.cambridge.org/vi/dictionary/english-vietnamese/" +
+              'https://dictionary.cambridge.org/vi/dictionary/english-vietnamese/' +
               data;
-            document.getElementById("mean").setAttribute("height", "700px");
+            document.getElementById('mean').setAttribute('height', '700px');
           } else {
-            url = "";
-            document.getElementById("mean").setAttribute("height", "auto");
+            url = '';
+            document.getElementById('mean').setAttribute('height', 'auto');
           }
-          document.getElementById("mean").setAttribute("src", url);
+          document.getElementById('mean').setAttribute('src', url);
         }
-        var input = document.getElementById("word");
-        input.addEventListener("keypress", function (event) {
-          if (event.key === "Enter") {
-            document.getElementById("btn").click();
+        var input = document.getElementById('word');
+        input.addEventListener('keypress', function (event) {
+          if (event.key === 'Enter') {
+            document.getElementById('btn').click();
           }
         });
       </script>
     </div>
+
+    <a id="nutbacktotop" href="javascript:void(0)" title="Back to Top"
+      ><img src="\images\backtotop.png" alt="Quay lại đầu trang"
+    /></a>
+    <script>
+      window.onscroll = function () {
+        scrollFunction();
+      };
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          document.getElementById('nutbacktotop').style.display = 'block';
+        } else {
+          document.getElementById('nutbacktotop').style.display = 'none';
+        }
+      }
+      document
+        .getElementById('nutbacktotop')
+        .addEventListener('click', function () {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+        });
+    </script>
   </body>
 </html>

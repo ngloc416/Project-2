@@ -105,7 +105,7 @@ header {
   margin-left: 15px;
 }
 
-#left #danhsach {
+#left .danhsach {
   color: black;
   text-align: center;
   padding-bottom: 50px;
@@ -151,7 +151,7 @@ header {
   border-top-right-radius: 8px;
 }
 
-#right input {
+#right #word {
   float: left;
   height: 25px;
   margin: 8px 3px 8px 8px;
@@ -179,4 +179,12 @@ header {
   margin-bottom: 0px;
   border: rgb(0, 0, 0) 1px hidden;
   border-radius: 8px;
+}
+
+#nutbacktotop {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
 }

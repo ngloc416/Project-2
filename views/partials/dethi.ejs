@@ -1,3 +1,12 @@
+<h3>Đề thi</h3>
+<ul>
+  <%for (const file of exams) { %>
+  <li>
+    <a href="dethi/<%= file %> "><%= file.substring(0, file.length - 4) %></a>
+  </li>
+  <% } %>
+</ul>
+
 <script>
-  document.getElementById("dethi").setAttribute("class", "selected");
+  document.getElementById('dethi').setAttribute('class', 'selected');
 </script>
